@@ -1,15 +1,17 @@
 <template>
-  <nav class="bg-[#292e35] flex items-center gap-11 justify-center max-h-16">
+  <nav class="bg-[#292e35] flex items-center gap-11 justify-between py-4 px-24 max-h-16">
     <div class="cursor-pointer">
-      <img src="../static/MoovieTime-Logo.svg" alt="logo-1" />
+      <NuxtLink :to="'/'">
+        <img src="../static/MoovieTime-Logo.svg" alt="logo-1" />
+      </NuxtLink>
     </div>
     <div class="flex items-center gap-4 bg-[#1e232a] p-2 px-4 rounded">
       <img src="../static/icon-mov.svg" alt="logo-2" />
-      <input type="text" placeholder="Find movie" class="bg-[#1e232a] w-96" />
+      <input type="text" placeholder="Find movie" class="bg-[#1e232a] w-[400px]" />
       <img src="../static/icon-search.svg" alt="logo-search" class="w-4" />
     </div>
     <div>
-      <ul class="flex gap-11">
+      <ul class="flex gap-12">
         <li>
           <div class="flex gap-4 cursor-pointer" id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar">
             <img src="../static/icon-category.svg" alt="logo-category" class="w-5" />
@@ -30,7 +32,9 @@
         </div>
         </li>
         <li>
-          <a class="uppercase text-white cursor-pointer">Movies</a>
+          <a class="uppercase text-white cursor-pointer">
+            <NuxtLink :to="'/movies'">Movies</NuxtLink>
+          </a>
         </li>
         <li>
           <a class="uppercase text-white cursor-pointer">TV Shows</a>

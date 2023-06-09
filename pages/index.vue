@@ -1,38 +1,60 @@
 <template>
   <section class="container bg-[#1e232a]">
-    <Navbar class="fixed top-0 p-4 w-full" />
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        movie-perqara
-      </h1>
-      <h2 class="subtitle">
-        Movie with Nuxt
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <CardCarousel class="py-10 flex justify-center" />
+    <Content />
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import AppLogo from '~/components/AppLogo.vue';
 import Navbar from '../components/Navbar.vue';
+import Content from '../components/Content.vue';
+import Footer from '../components/Footer.vue';
+import CardCarousel from '../components/CardCarousel.vue';
+import axios from 'axios';
 
 export default {
   components: {
     AppLogo,
     Navbar,
-  }
+    Content,
+    Footer,
+    CardCarousel,
+  },
+  env: {
+    apiKey: process.env.API_KEY,
+  },
+  data() {
+    return {
+      options: {
+        slidesPerView: 3,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination'
+        }
+      }
+    }
+  },
+  async mounted() {
+    try {
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${process.env.apiKey}`,
+        },
+      };
+      const response = await axios.get('https://api.themoviedb.org/3/movie/11', config);
+      const data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  },
 }
+
+
+// const config = { headers: { 'Authorization': `Bearer 60967d59ebd299b1cbe2f62c06fb1f30` } };
+// const { data } = await useFetch('https://api.themoviedb.org/3/movie/11', config)
+// console.log({data})
 </script>
 
 <style>
@@ -40,9 +62,10 @@ export default {
   min-height: 100vh;
   min-width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* text-align: center; */
 }
 
 .title {

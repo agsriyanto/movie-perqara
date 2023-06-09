@@ -46,4 +46,7 @@ module.exports = {
   css: [
     '@/assets/css/main.css',
   ],
+  modules: [
+    '@nuxtjs/axios',
+  ],
 }
